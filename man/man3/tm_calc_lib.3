@@ -1,0 +1,61 @@
+.\" 
+.\" Copyright (c) 2009 Gordon D. Carrie.  All rights reserved.
+.\" 
+.\" Licensed under the Open Software License version 2.1
+.\" 
+.\" Please address questions and feedback to user0@tkgeomap.org
+.\"
+.\" $Revision: $ $Date: $
+.\"
+.TH tm_calc 1 "time functions"
+.SH NAME
+GeoTime_CalSet, GeoTime_JulSet, GeoTime_CalToJul, GeoTime_JulToCal, GeoTime_Incr, GeoTime_Cmp, GeoTime_Diff \- basic time calculations and comparisons.
+.SH SYNOPSIS
+.nf
+\fB#include <tm_calc_lib.h>\fR
+\fBstruct GeoTime_Cal\fR \fBGeoTime_CalSet\fR(\fBint\fR \fIyear\fR, \fBint\fR \fImonth\fR, \fBint\fR \fIday\fR, \fBint\fR \fIhour\fR, \fBint\fR \fIminute\fR, \fBfloat\fR \fIsecond\fR);
+\fBstruct GeoTime_Jul\fR \fBGeoTime_JulSet\fR(\fBint\fR \fIday\fR, \fBfloat\fR \fIsecond\fR);
+\fBstruct GeoTime_Jul\fR \fBGeoTime_CalToJul\fR(\fBstruct GeoTime_Cal\fR \fIcal\fR);
+\fBstruct GeoTime_Cal\fR \fBGeoTime_JulToCal\fR(\fBstruct GeoTime_Jul\fR \fIjul\fR);
+\fBvoid\fR \fBGeoTime_Incr\fR(\fBstruct GeoTime_Jul\fR *\fIjul\fR, \fBdouble\fR \fIds\fR);
+\fBint\fR \fBGeoTime_Cmp\fR(\fBstruct GeoTime_Jul\fR \fIjul1\fR, \fBstruct GeoTime_Jul\fR \fIjul2\fR);
+\fBfloat\fR \fBGeoTime_Diff\fR(\fBstruct\fR \fBGeoTime_Jul\fR \fIjul1\fR, \fBstruct\fR \fBGeoTime_Jul\fR \fIjul2\fR);
+.fi
+.SH DESCRIPTION
+The GeoTime functions store and manipulate time values stored in either of two structures.  Structures of form:
+.CS
+struct GeoTime_Jul {
+    int   day;
+    float second;
+};
+.CE
+store a time instant as a Julian day and seconds within that day.
+\fBGeoTime_JulSet\fR returns a \fBGeoTime_Jul\fR struct with
+the given \fIday\fR and \fIsecond\fR values.
+Structures of form:
+.CS
+struct GeoTime_Cal {
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
+    float second;
+};
+.CE
+store a time instant with its calendar and clock values.
+\fBGeoTime_CalSet\fR returns a structure containing the given
+\fIyear\fR, \fImonth\fR, \fIday\fR, \fIhour\fR, \fIminute\fR, and \fIsecond\fR.
+\fBGeoTime_CalToJul\fR returns the Julian
+representation of a given calendar time.  \fBGeoTime_JulToCal\fR returns
+the calendar representation of a given Julian time.  \fBGeoTime_Incr\fR
+increments \fIjul\fR by \fIds\fR seconds. \fBGeoTime_Cmp\fR returns
+\fB-1\fR if \fIjul1\fR is before \fIjul2\fR, \fB1\fR if \fIjul1\fR is after
+\fIjul2\fR or \fB0\fR if \fIjul1\fR and \fIjul2\fR are the same time.
+\fBGeoTime_Diff\fR returns \fIjul1\fR minus \fIjul2\fR in seconds.
+.SH "SEE ALSO"
+tm_cal (1)
+.SH KEYWORDS
+time
+.SH AUTHOR
+Gordon Carrie (user0@tkgeomap.org)
