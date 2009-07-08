@@ -7,7 +7,7 @@
   
    Please send feedback to dev0@trekix.net
 
-   $Revision: 1.1 $ $Date: 2009/07/07 21:45:04 $
+   $Revision: 1.2 $ $Date: 2009/07/08 19:10:34 $
  */
 
 #include <stdlib.h>
@@ -22,17 +22,17 @@ char *cmd, *cmd1;
 
 /* Callback functions.  There should be one for each subcommand. */
 typedef int (callback)(int , char **);
-callback julset_cb;
 callback caltojul_cb;
+callback jultocal_cb;
 
 /* Number of subcommands */
 #define NCMD 2
 
 /* Array of subcommand names */
-char *cmd1v[NCMD] = {"julset", "caltojul"};
+char *cmd1v[NCMD] = {"caltojul", "jultocal"};
 
 /* Array of subcomand callbacks. cb1v[i] is the callback for cmd1v[i] */
-callback *cb1v[NCMD] = {julset_cb, caltojul_cb};
+callback *cb1v[NCMD] = {caltojul_cb, jultocal_cb};
 
 int main(int argc, char *argv[])
 {
@@ -66,51 +66,15 @@ int main(int argc, char *argv[])
     }
     return !rslt;
 }
-
-int julset_cb(int argc, char *argv[])
-{
-    char *d_s, *s_s;		/* Strings from command line */
-    int d; double s;		/* Values from command line */
-    struct tm_jul j;
-
-    /* Ensure minimum command line */
-    if (argc != 3) {
-	err_append("Usage: ");
-	err_append(cmd);
-	err_append(" ");
-	err_append(cmd1);
-	err_append(" days seconds\n");
-	return 0;
-    }
-    d_s = argv[1];
-    s_s = argv[2];
-
-    /* Get values from command line arguments */
-    if (sscanf(d_s, "%d", &d) != 1) {
-	err_append("Expected integer value for day, got ");
-	err_append(d_s);
-	return 0;
-    }
-    if (sscanf(s_s, "%lf", &s) != 1) {
-	err_append("Expected float value for seconds, got ");
-	err_append(s_s);
-	return 0;
-    }
-
-    /* Send result */
-    j = tm_julset(d, s);
-    printf("%d %f\n", j.day, j.second);
-    return 1;
-}
-
+
 int caltojul_cb(int argc, char *argv[])
 {
     char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
     int yr, mo, dy, hr, mi;
     double sc;
-    int i;
+    int da;
     char *fmt;
-    struct tm_jul j;
+    double j;
 
     /* Ensure minimum command line */
     if (argc < 7) {
@@ -121,18 +85,18 @@ int caltojul_cb(int argc, char *argv[])
 	err_append(" year month day hour minute second\n");
 	return 0;
     }
-    fmt = "%d %lf\n";
-    i = 1;
+    fmt = "%lf\n";
+    da = 0;
     if (strcmp(argv[1], "-f") == 0) {
 	fmt = stresc(argv[2]);
-	i += 2;
+	da = 2;
     }
-    yr_s = argv[i++];
-    mo_s = argv[i++];
-    dy_s = argv[i++];
-    hr_s = argv[i++];
-    mi_s = argv[i++];
-    sc_s = argv[i];
+    yr_s = argv[1 + da];
+    mo_s = argv[2 + da];
+    dy_s = argv[3 + da];
+    hr_s = argv[4 + da];
+    mi_s = argv[5 + da];
+    sc_s = argv[6 + da];
 
     /* Get values from command line arguments */
     if (sscanf(yr_s, "%d", &yr) != 1) {
@@ -160,14 +124,57 @@ int caltojul_cb(int argc, char *argv[])
 	err_append(mi_s);
 	return 0;
     }
-    if (sscanf(sc_s, "%f", &sc) != 1) {
+    if (sscanf(sc_s, "%lf", &sc) != 1) {
 	err_append("Expected float value for second, got ");
 	err_append(sc_s);
 	return 0;
     }
 
     /* Send result */
-    j = tm_caltojul(yr, mo, dy, hr, mi, sc);
-    printf(fmt, j.day, j.second);
+    if ( !tm_caltojul(yr, mo, dy, hr, mi, sc, &j) ) {
+	return 0;
+    }
+    printf(fmt, j);
     return 1;
+}
+
+int jultocal_cb(int argc, char *argv[])
+{
+    int yr, mo, dy, hr, mi;
+    double sc;
+    char *fmt;
+    char *j_s;
+    double j;
+
+    /* Ensure minimum command line */
+    if (argc < 2) {
+	err_append("Usage: ");
+	err_append(cmd);
+	err_append(" ");
+	err_append(cmd1);
+	err_append(" julian_day\n");
+	return 0;
+    }
+    fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
+    if (strcmp(argv[1], "-f") == 0) {
+	fmt = stresc(argv[2]);
+	j_s = argv[3];
+    } else {
+	j_s = argv[1];
+    }
+
+    /* Get Julian date from command line argument */
+    if (sscanf(j_s, "%lf", &j) != 1) {
+	err_append("Expected float value for Julian day, got ");
+	err_append(j_s);
+	return 0;
+    }
+
+    /* Send result */
+    if (tm_jultocal(j, &yr, &mo, &dy, &hr, &mi, &sc)) {
+	printf(fmt, yr, mo, dy, hr, mi, sc);
+	return 1;
+    } else {
+	return 0;
+    }
 }
