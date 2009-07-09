@@ -14,7 +14,7 @@
 	Communications of the ACM archive
 	Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
 
-   $Revision: 1.2 $ $Date: 2009/07/08 21:44:48 $
+   $Revision: 1.3 $ $Date: 2009/07/09 15:46:42 $
  */
 
 #include <math.h>
@@ -27,7 +27,7 @@ double tm_resoln(int y, int mo, int d, int h, int mi, double s)
 
     j1 = tm_caltojul(y, mo, d, h, mi, s);
     j2 = nextafter(j1, j1 + 1);
-    return fabs(j1 - j2) * 86400.0;
+    return (j2 - j1) * 86400.0;
 }
 
 double tm_caltojul(int year, int month, int day,
