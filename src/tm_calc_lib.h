@@ -9,16 +9,14 @@
 
    Please address questions and feedback to dev0@trekix.net.
 
-   @(#) $Id: tm_calc_lib.h,v 1.1 2009/07/07 21:43:29 gcarrie Exp $
+   @(#) $Id: tm_calc_lib.h,v 1.2 2009/07/08 21:44:48 gcarrie Exp $
  */
 
 #ifndef _TMCALC_H_
 #define _TMCALC_H_
 
-/* Desired time resolution, in seconds */
-#define TMCALC_RESOLUTION 0.0001
-
-int tm_caltojul(int, int, int, int, int, double, double *);
+double tm_resoln(int, int, int, int, int, double);
+double tm_caltojul(int, int, int, int, int, double);
 int tm_jultocal(double, int *, int *, int *, int *, int *, double *);
 
 #endif

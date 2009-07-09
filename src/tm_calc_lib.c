@@ -14,30 +14,29 @@
 	Communications of the ACM archive
 	Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
 
-   $Revision: 1.1 $ $Date: 2009/07/07 21:44:08 $
+   $Revision: 1.2 $ $Date: 2009/07/08 21:44:48 $
  */
 
 #include <math.h>
 #include "err_msg.h"
 #include "tm_calc_lib.h"
 
-int tm_caltojul(int year, int month, int day,
-	int hour, int minute, double second, double *julday)
+double tm_resoln(int y, int mo, int d, int h, int mi, double s)
 {
     double j1, j2;
 
-    j1 =   (1461 * (year + 4800 + (month - 14) / 12)) / 4
+    j1 = tm_caltojul(y, mo, d, h, mi, s);
+    j2 = nextafter(j1, j1 + 1);
+    return fabs(j1 - j2) * 86400.0;
+}
+
+double tm_caltojul(int year, int month, int day,
+	int hour, int minute, double second)
+{
+    return (1461 * (year + 4800 + (month - 14) / 12)) / 4
 	+ (367 * (month - 2 - 12 * ((month - 14) / 12))) / 12
 	- (3 * ((year + 4900 + (month - 14) / 12) / 100)) / 4
 	+ day - 32075 + hour / 24.0 + minute / 1440.0 + second / 86400.0;
-    /* Check for inadequate resolution */
-    j2 = nextafter(j1, j1 + 1);
-    if (fabs(j1 - j2) * 86400.0 > TMCALC_RESOLUTION) {
-	err_append("Julian date to big for desired resolution.");
-	return 0;
-    }
-    *julday = j1;
-    return 1;
 }
 
 int tm_jultocal(double julday, int *year, int *month,
