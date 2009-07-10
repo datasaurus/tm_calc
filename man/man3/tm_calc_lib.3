@@ -5,15 +5,15 @@
 .\" 
 .\" Please address questions and feedback to user0@tkgeomap.org
 .\"
-.\" $Revision: $ $Date: $
+.\" $Revision: 1.2 $ $Date: 2009/07/10 19:29:19 $
 .\"
 .TH tm_calc 1 "time functions"
 .SH NAME
 tm_resoln, tm_caltojul, tm_jultocal \- basic time conversions.
 .SH SYNOPSIS
 .nf
-\fB#include <tm_calc_lib.h>\fR
-\fBdouble tm_caltojul\fP(\fBint\fP \fIyear\fR, \fBint\fP \fImonth\fR, \fBint\fP \fIday\fR, \fBint\fP \fIhour\fR, \fBint\fP \fIminute\fR, \fBdouble\fP \fIsecond\fR);
+\fB#include <tm_calc_lib.h>\fP
+\fBdouble tm_caltojul\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP, \fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
 \fBint tm_jultocal\fP(\fBdouble\fP \fIjulian_day\fP, \fBint *\fP \fIyear\fP, \fBint *\fP \fImonth\fP, \fBint *\fP \fIday\fP, \fBint *\fP \fIhour\fP, \fBint *\fP \fIminute\fP, \fBdouble *\fP \fIsecond\fP);
 \fBdouble tm_resoln\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP, \fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
 .fi
@@ -21,16 +21,16 @@ tm_resoln, tm_caltojul, tm_jultocal \- basic time conversions.
 These functions convert back and forth between calendar/clock\ time representations
 and Julian days.
 
-\fBtm_caltojul\fP returns the Julian day corresponding to \fIyear\fR \fImonth\fR
-\fIday\fR \fIhour\fR \fIminute\fR \fIsecond\fR.
+\fBtm_caltojul\fP returns the Julian day corresponding to \fIyear\fP \fImonth\fP
+\fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.
 
 \fBtm_jultocal\fP puts the calendar/clock\ time values for Julian time
-\fIjulian_day\fR into \fIyear\fP \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP
+\fIjulian_day\fP into \fIyear\fP \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP
 \fIsecond\fP.  If successful, it returns true.  If something goes wrong,
 it makes an error message that can be retrieved with \fBerr_get\fP and returns
 false.
 
-\fBtm_resoln\fR returns the smallest increment, in seconds, after time \fIyear\fP
+\fBtm_resoln\fP returns the smallest increment, in seconds, after time \fIyear\fP
 \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.
 .SH "SEE ALSO"
 tm_calc (1), err_msg (3)
