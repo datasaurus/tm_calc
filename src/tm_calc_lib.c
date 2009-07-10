@@ -14,7 +14,7 @@
 	Communications of the ACM archive
 	Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
 
-   $Revision: 1.3 $ $Date: 2009/07/09 15:46:42 $
+   $Revision: 1.4 $ $Date: 2009/07/09 15:49:18 $
  */
 
 #include <math.h>
@@ -36,7 +36,7 @@ double tm_caltojul(int year, int month, int day,
     return (1461 * (year + 4800 + (month - 14) / 12)) / 4
 	+ (367 * (month - 2 - 12 * ((month - 14) / 12))) / 12
 	- (3 * ((year + 4900 + (month - 14) / 12) / 100)) / 4
-	+ day - 32075 + hour / 24.0 + minute / 1440.0 + second / 86400.0;
+	+ day - 32075 + hour / 24.0 + minute / 1440.0 + second / 86400.0 - 0.5;
 }
 
 int tm_jultocal(double julday, int *year, int *month,
@@ -46,6 +46,7 @@ int tm_jultocal(double julday, int *year, int *month,
     int l, n, i, j;		/* Intermediaries */
     double ihour, fhour, imin, fmin;
 
+    julday += 0.5;
     fday = modf(julday, &iday);
     if (iday > INT_MAX) {
 	err_append("Julian date too big for integer arithmetic.");
