@@ -7,7 +7,7 @@
   
    Please send feedback to dev0@trekix.net
 
-   $Revision: 1.3 $ $Date: 2009/07/08 21:47:06 $
+   $Revision: 1.4 $ $Date: 2009/07/09 15:47:28 $
  */
 
 #include <stdlib.h>
@@ -64,6 +64,11 @@ int main(int argc, char *argv[])
     }
     if (i == NCMD) {
 	fprintf(stderr, "%s: No option or subcommand named %s\n", cmd, cmd1);
+	fprintf(stderr, "Subcommand must be one of: ");
+	for (i = 0; i < NCMD; i++) {
+	    fprintf(stderr, "%s ", cmd1v[i]);
+	}
+	fprintf(stderr, "\n");
     }
     return !rslt;
 }
