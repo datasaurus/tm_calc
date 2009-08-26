@@ -8,7 +8,7 @@
 #
 # Please send feedback to dev0@trekix.net
 #
-# $Revision: $ $Date: $
+# $Revision: 1.1 $ $Date: 2009/07/10 21:35:27 $
 #
 ########################################################################
 
@@ -57,10 +57,10 @@ j=`tm_calc jultocal -f '%04d %02d %02d %02d %02d %04.1f\n' 2455022.50`
 if [ "$j" == "2009 07 10 00 00 00.0" ]
 then
     echo "tm_calc produced correct output."
-    result1=success
+    result2=success
 else
     echo "tm_calc produced bad output!"
-    result1=fail
+    result2=fail
 fi
 echo "test2 result = $result2
 Done with test2
