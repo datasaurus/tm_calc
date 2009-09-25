@@ -3,11 +3,11 @@
  - 	This file defines an application that does time calculations.
  -
    Copyright (c) 2008 Gordon D. Carrie
-   Licensed under the Open Software License version 3.0
+   All rights reserved
   
    Please send feedback to dev0@trekix.net
 
-   $Revision: 1.4 $ $Date: 2009/07/09 15:47:28 $
+   $Revision: 1.5 $ $Date: 2009/07/10 19:04:07 $
  */
 
 #include <stdlib.h>
@@ -153,7 +153,7 @@ int caltojul_cb(int argc, char *argv[])
 	err_append(cmd);
 	err_append(" ");
 	err_append(cmd1);
-	err_append(" year month day hour minute second\n");
+	err_append(" [-f format] year month day hour minute second\n");
 	return 0;
     }
     fmt = "%lf\n";
@@ -220,7 +220,7 @@ int jultocal_cb(int argc, char *argv[])
 	err_append(cmd);
 	err_append(" ");
 	err_append(cmd1);
-	err_append(" julian_day\n");
+	err_append("[-f format] julian_day\n");
 	return 0;
     }
     fmt = "%02d %02d %02d %02d %02d %04.1lf\n";

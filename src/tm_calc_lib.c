@@ -3,8 +3,7 @@
  -	This file defines functions for manipulate date and times
  - 
    Copyright (c) 2009 Gordon D. Carrie
-
-   Licensed under the Open Software License version 2.1
+   All rights reserved
 
    Please send feedback to user0@tkgeomap.org
 
@@ -14,7 +13,7 @@
 	Communications of the ACM archive
 	Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
 
-   $Revision: 1.4 $ $Date: 2009/07/09 15:49:18 $
+   $Revision: 1.5 $ $Date: 2009/07/10 21:26:02 $
  */
 
 #include <math.h>

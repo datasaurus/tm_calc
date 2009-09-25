@@ -4,11 +4,11 @@
 #-	This test application tests conversion functions defined in tm_calc_lib.c.
 #-
 # Copyright (c) 2009 Gordon D. Carrie
-# Licensed under the Open Software License version 3.0
+# All rights reserved
 #
 # Please send feedback to dev0@trekix.net
 #
-# $Revision: 1.1 $ $Date: 2009/07/10 21:35:27 $
+# $Revision: 1.2 $ $Date: 2009/08/26 22:49:22 $
 #
 ########################################################################
 
@@ -24,7 +24,7 @@ To save temporary files:
 env RM=: ./tm_calc.sh 2>&1 | less
 
 Copyright (c) 2009 Gordon D. Carrie
-Licensed under the Open Software License version 3.0
+All rights reserved
 
 ################################################################################
 "

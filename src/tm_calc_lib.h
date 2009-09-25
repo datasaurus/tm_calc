@@ -3,13 +3,12 @@
  -	This header declares structures and functions that store and
  -	manipulate time values.
  - 
-   Copyright (c) 2009 Gordon D. Carrie.  All rights reserved.
-
-   Licensed under the Open Software License version 2.1
+   Copyright (c) 2009 Gordon D. Carrie
+   All rights reserved
 
    Please address questions and feedback to dev0@trekix.net.
 
-   @(#) $Id: tm_calc_lib.h,v 1.2 2009/07/08 21:44:48 gcarrie Exp $
+   @(#) $Id: tm_calc_lib.h,v 1.3 2009/07/09 15:46:42 gcarrie Exp $
  */
 
 #ifndef _TMCALC_H_
