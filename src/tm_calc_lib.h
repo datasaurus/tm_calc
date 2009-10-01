@@ -1,14 +1,15 @@
 /*
- - tm_calc.h --
- -	This header declares structures and functions that store and
- -	manipulate time values.
- - 
-   Copyright (c) 2009 Gordon D. Carrie
-   All rights reserved
-
-   Please address questions and feedback to dev0@trekix.net.
-
-   @(#) $Id: tm_calc_lib.h,v 1.3 2009/07/09 15:46:42 gcarrie Exp $
+   -	tm_calc.h --
+   -		This header declares structures and
+   -		functions that store and manipulate
+   -		time values.  See tm_calc (3).
+   -	
+   .	Copyright (c) 2009 Gordon D. Carrie
+   .	All rights reserved
+   .
+   .	Please address questions and feedback to dev0@trekix.net.
+   .
+   .	$Revision: $ $Date: $
  */
 
 #ifndef _TMCALC_H_

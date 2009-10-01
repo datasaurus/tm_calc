@@ -1,13 +1,14 @@
 /*
- - tm_calc.c --
- - 	This file defines an application that does time calculations.
- -
-   Copyright (c) 2008 Gordon D. Carrie
-   All rights reserved
-  
-   Please send feedback to dev0@trekix.net
-
-   $Revision: 1.6 $ $Date: 2009/09/25 21:33:14 $
+   -	tm_calc.c --
+   -		This file defines an application that does
+   -		time calculations.
+   -	
+   .	Copyright (c) 2008 Gordon D. Carrie
+   .	All rights reserved
+   .
+   .	Please send feedback to dev0@trekix.net
+   .
+   .	$Revision: 1.7 $ $Date: 2009/10/01 21:43:46 $
  */
 
 #include <stdlib.h>
