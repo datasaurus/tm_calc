@@ -7,13 +7,13 @@
 
    Please send feedback to user0@tkgeomap.org
 
-   Reference for calendar compuations:
+   Reference for calendar computations:
 	Henry F. Fliegel and Thomas C. Van Flandern
 	Letters to the editor: a machine algorithm for processing calendar dates
 	Communications of the ACM archive
 	Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
 
-   $Revision: 1.5 $ $Date: 2009/07/10 21:26:02 $
+   $Revision: 1.6 $ $Date: 2009/09/25 21:33:14 $
  */
 
 #include <math.h>

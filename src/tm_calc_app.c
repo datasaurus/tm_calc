@@ -7,7 +7,7 @@
   
    Please send feedback to dev0@trekix.net
 
-   $Revision: 1.5 $ $Date: 2009/07/10 19:04:07 $
+   $Revision: 1.6 $ $Date: 2009/09/25 21:33:14 $
  */
 
 #include <stdlib.h>
@@ -32,7 +32,7 @@ callback jultocal_cb;
 /* Array of subcommand names */
 char *cmd1v[NCMD] = {"resoln", "caltojul", "jultocal"};
 
-/* Array of subcomand callbacks. cb1v[i] is the callback for cmd1v[i] */
+/* Array of subcommand callbacks. cb1v[i] is the callback for cmd1v[i] */
 callback *cb1v[NCMD] = {resoln_cb, caltojul_cb, jultocal_cb};
 
 int main(int argc, char *argv[])
