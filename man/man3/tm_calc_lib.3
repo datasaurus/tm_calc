@@ -4,7 +4,7 @@
 .\" 
 .\" Please address questions and feedback to user0@tkgeomap.org
 .\"
-.\" $Revision: 1.3 $ $Date: 2009/07/10 20:01:51 $
+.\" $Revision: 1.4 $ $Date: 2009/09/25 21:33:14 $
 .\"
 .TH tm_calc 1 "time functions"
 .SH NAME
@@ -30,7 +30,8 @@ it makes an error message that can be retrieved with \fBerr_get\fP and returns
 false.
 
 \fBtm_resoln\fP returns the smallest increment, in seconds, after time \fIyear\fP
-\fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.
+\fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.  For reference, 64
+bit \fBdouble\fP gives resolution of about 40 microseconds until noon, 7 July 6771.
 .SH "SEE ALSO"
 tm_calc (1), err_msg (3)
 .SH KEYWORDS
