@@ -9,14 +9,14 @@
    .
    .	Please address questions and feedback to dev0@trekix.net.
    .
-   .	$Revision: $ $Date: $
+   .	$Revision: 1.5 $ $Date: 2009/10/01 22:15:22 $
  */
 
 #ifndef _TMCALC_H_
 #define _TMCALC_H_
 
-double tm_resoln(int, int, int, int, int, double);
-double tm_caltojul(int, int, int, int, int, double);
-int tm_jultocal(double, int *, int *, int *, int *, int *, double *);
+double Tm_Resoln(int, int, int, int, int, double);
+double Tm_CalToJul(int, int, int, int, int, double);
+int Tm_JulToCal(double, int *, int *, int *, int *, int *, double *);
 
 #endif

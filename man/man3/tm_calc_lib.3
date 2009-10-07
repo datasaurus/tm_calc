@@ -4,32 +4,35 @@
 .\" 
 .\" Please address questions and feedback to user0@tkgeomap.org
 .\"
-.\" $Revision: 1.4 $ $Date: 2009/09/25 21:33:14 $
+.\" $Revision: 1.5 $ $Date: 2009/10/02 21:12:06 $
 .\"
 .TH tm_calc 1 "time functions"
 .SH NAME
-tm_resoln, tm_caltojul, tm_jultocal \- basic time conversions.
+Tm_Resoln, Tm_CalToJul, Tm_JulToCal \- basic time conversions.
 .SH SYNOPSIS
 .nf
 \fB#include <tm_calc_lib.h>\fP
-\fBdouble tm_caltojul\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP, \fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
-\fBint tm_jultocal\fP(\fBdouble\fP \fIjulian_day\fP, \fBint *\fP \fIyear\fP, \fBint *\fP \fImonth\fP, \fBint *\fP \fIday\fP, \fBint *\fP \fIhour\fP, \fBint *\fP \fIminute\fP, \fBdouble *\fP \fIsecond\fP);
-\fBdouble tm_resoln\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP, \fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
+\fBdouble Tm_CalToJul\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP,
+	\fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
+\fBint Tm_JulToCal\fP(\fBdouble\fP \fIjulian_day\fP, \fBint *\fP \fIyear\fP, \fBint *\fP \fImonth\fP, \fBint *\fP \fIday\fP,
+	\fBint *\fP \fIhour\fP, \fBint *\fP \fIminute\fP, \fBdouble *\fP \fIsecond\fP);
+\fBdouble Tm_Resoln\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP,
+	\fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
 .fi
 .SH DESCRIPTION
 These functions convert back and forth between calendar/clock\ time representations
 and Julian days.
 
-\fBtm_caltojul\fP returns the Julian day corresponding to \fIyear\fP \fImonth\fP
+\fBTm_CalToJul\fP returns the Julian day corresponding to \fIyear\fP \fImonth\fP
 \fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.
 
-\fBtm_jultocal\fP puts the calendar/clock\ time values for Julian time
+\fBTm_JulToCal\fP puts the calendar/clock\ time values for Julian time
 \fIjulian_day\fP into \fIyear\fP \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP
 \fIsecond\fP.  If successful, it returns true.  If something goes wrong,
-it makes an error message that can be retrieved with \fBerr_get\fP and returns
+it makes an error message that can be retrieved with \fBErr_Get\fP and returns
 false.
 
-\fBtm_resoln\fP returns the smallest increment, in seconds, after time \fIyear\fP
+\fBTm_Resoln\fP returns the smallest increment, in seconds, after time \fIyear\fP
 \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.  For reference, 64
 bit \fBdouble\fP gives resolution of about 40 microseconds until noon, 7 July 6771.
 .SH "SEE ALSO"

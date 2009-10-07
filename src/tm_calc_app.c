@@ -8,7 +8,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.7 $ $Date: 2009/10/01 21:43:46 $
+   .	$Revision: 1.8 $ $Date: 2009/10/01 22:15:22 $
  */
 
 #include <stdlib.h>
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 	    rslt = (cb1v[i])(argc - 1, argv + 1);
 	    if ( !rslt ) {
 		fprintf(stderr, "%s %s failed.\n", cmd, cmd1);
-		fprintf(stderr, "%s\n", err_get());
+		fprintf(stderr, "%s\n", Err_Get());
 		break;
 	    } else {
 		break;
@@ -83,17 +83,17 @@ int resoln_cb(int argc, char *argv[])
 
     /* Ensure minimum command line */
     if (argc < 7) {
-	err_append("Usage: ");
-	err_append(cmd);
-	err_append(" ");
-	err_append(cmd1);
-	err_append(" [-f format] year month day hour minute second\n");
+	Err_Append("Usage: ");
+	Err_Append(cmd);
+	Err_Append(" ");
+	Err_Append(cmd1);
+	Err_Append(" [-f format] year month day hour minute second\n");
 	return 0;
     }
     fmt = "%lf\n";
     da = 0;
     if (strcmp(argv[1], "-f") == 0) {
-	fmt = stresc(argv[2]);
+	fmt = Str_Esc(argv[2]);
 	da = 2;
     }
     yr_s = argv[1 + da];
@@ -105,38 +105,38 @@ int resoln_cb(int argc, char *argv[])
 
     /* Get values from command line arguments */
     if (sscanf(yr_s, "%d", &yr) != 1) {
-	err_append("Expected integer value for year, got ");
-	err_append(yr_s);
+	Err_Append("Expected integer value for year, got ");
+	Err_Append(yr_s);
 	return 0;
     }
     if (sscanf(mo_s, "%d", &mo) != 1) {
-	err_append("Expected integer value for month, got ");
-	err_append(mo_s);
+	Err_Append("Expected integer value for month, got ");
+	Err_Append(mo_s);
 	return 0;
     }
     if (sscanf(dy_s, "%d", &dy) != 1) {
-	err_append("Expected integer value for day, got ");
-	err_append(dy_s);
+	Err_Append("Expected integer value for day, got ");
+	Err_Append(dy_s);
 	return 0;
     }
     if (sscanf(hr_s, "%d", &hr) != 1) {
-	err_append("Expected integer value for hour, got ");
-	err_append(hr_s);
+	Err_Append("Expected integer value for hour, got ");
+	Err_Append(hr_s);
 	return 0;
     }
     if (sscanf(mi_s, "%d", &mi) != 1) {
-	err_append("Expected integer value for minute, got ");
-	err_append(mi_s);
+	Err_Append("Expected integer value for minute, got ");
+	Err_Append(mi_s);
 	return 0;
     }
     if (sscanf(sc_s, "%lf", &sc) != 1) {
-	err_append("Expected float value for second, got ");
-	err_append(sc_s);
+	Err_Append("Expected float value for second, got ");
+	Err_Append(sc_s);
 	return 0;
     }
 
     /* Send result */
-    printf(fmt, tm_resoln(yr, mo, dy, hr, mi, sc));
+    printf(fmt, Tm_Resoln(yr, mo, dy, hr, mi, sc));
     return 1;
 }
 
@@ -150,17 +150,17 @@ int caltojul_cb(int argc, char *argv[])
 
     /* Ensure minimum command line */
     if (argc < 7) {
-	err_append("Usage: ");
-	err_append(cmd);
-	err_append(" ");
-	err_append(cmd1);
-	err_append(" [-f format] year month day hour minute second\n");
+	Err_Append("Usage: ");
+	Err_Append(cmd);
+	Err_Append(" ");
+	Err_Append(cmd1);
+	Err_Append(" [-f format] year month day hour minute second\n");
 	return 0;
     }
     fmt = "%lf\n";
     da = 0;
     if (strcmp(argv[1], "-f") == 0) {
-	fmt = stresc(argv[2]);
+	fmt = Str_Esc(argv[2]);
 	da = 2;
     }
     yr_s = argv[1 + da];
@@ -172,38 +172,38 @@ int caltojul_cb(int argc, char *argv[])
 
     /* Get values from command line arguments */
     if (sscanf(yr_s, "%d", &yr) != 1) {
-	err_append("Expected integer value for year, got ");
-	err_append(yr_s);
+	Err_Append("Expected integer value for year, got ");
+	Err_Append(yr_s);
 	return 0;
     }
     if (sscanf(mo_s, "%d", &mo) != 1) {
-	err_append("Expected integer value for month, got ");
-	err_append(mo_s);
+	Err_Append("Expected integer value for month, got ");
+	Err_Append(mo_s);
 	return 0;
     }
     if (sscanf(dy_s, "%d", &dy) != 1) {
-	err_append("Expected integer value for day, got ");
-	err_append(dy_s);
+	Err_Append("Expected integer value for day, got ");
+	Err_Append(dy_s);
 	return 0;
     }
     if (sscanf(hr_s, "%d", &hr) != 1) {
-	err_append("Expected integer value for hour, got ");
-	err_append(hr_s);
+	Err_Append("Expected integer value for hour, got ");
+	Err_Append(hr_s);
 	return 0;
     }
     if (sscanf(mi_s, "%d", &mi) != 1) {
-	err_append("Expected integer value for minute, got ");
-	err_append(mi_s);
+	Err_Append("Expected integer value for minute, got ");
+	Err_Append(mi_s);
 	return 0;
     }
     if (sscanf(sc_s, "%lf", &sc) != 1) {
-	err_append("Expected float value for second, got ");
-	err_append(sc_s);
+	Err_Append("Expected float value for second, got ");
+	Err_Append(sc_s);
 	return 0;
     }
 
     /* Send result */
-    printf(fmt, tm_caltojul(yr, mo, dy, hr, mi, sc));
+    printf(fmt, Tm_CalToJul(yr, mo, dy, hr, mi, sc));
     return 1;
 }
 
@@ -217,16 +217,16 @@ int jultocal_cb(int argc, char *argv[])
 
     /* Ensure minimum command line */
     if (argc < 2) {
-	err_append("Usage: ");
-	err_append(cmd);
-	err_append(" ");
-	err_append(cmd1);
-	err_append("[-f format] julian_day\n");
+	Err_Append("Usage: ");
+	Err_Append(cmd);
+	Err_Append(" ");
+	Err_Append(cmd1);
+	Err_Append("[-f format] julian_day\n");
 	return 0;
     }
     fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
     if (strcmp(argv[1], "-f") == 0) {
-	fmt = stresc(argv[2]);
+	fmt = Str_Esc(argv[2]);
 	j_s = argv[3];
     } else {
 	j_s = argv[1];
@@ -234,13 +234,13 @@ int jultocal_cb(int argc, char *argv[])
 
     /* Get Julian date from command line argument */
     if (sscanf(j_s, "%lf", &j) != 1) {
-	err_append("Expected float value for Julian day, got ");
-	err_append(j_s);
+	Err_Append("Expected float value for Julian day, got ");
+	Err_Append(j_s);
 	return 0;
     }
 
     /* Send result */
-    if (tm_jultocal(j, &yr, &mo, &dy, &hr, &mi, &sc)) {
+    if (Tm_JulToCal(j, &yr, &mo, &dy, &hr, &mi, &sc)) {
 	printf(fmt, yr, mo, dy, hr, mi, sc);
 	return 1;
     } else {

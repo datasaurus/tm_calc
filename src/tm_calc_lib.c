@@ -14,23 +14,23 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.7 $ $Date: 2009/10/01 21:43:46 $
+   .	$Revision: 1.8 $ $Date: 2009/10/01 22:15:22 $
  */
 
 #include <math.h>
 #include "err_msg.h"
 #include "tm_calc_lib.h"
 
-double tm_resoln(int y, int mo, int d, int h, int mi, double s)
+double Tm_Resoln(int y, int mo, int d, int h, int mi, double s)
 {
     double j1, j2;
 
-    j1 = tm_caltojul(y, mo, d, h, mi, s);
+    j1 = Tm_CalToJul(y, mo, d, h, mi, s);
     j2 = nextafter(j1, j1 + 1);
     return (j2 - j1) * 86400.0;
 }
 
-double tm_caltojul(int year, int month, int day,
+double Tm_CalToJul(int year, int month, int day,
 	int hour, int minute, double second)
 {
     return (1461 * (year + 4800 + (month - 14) / 12)) / 4
@@ -39,7 +39,7 @@ double tm_caltojul(int year, int month, int day,
 	+ day - 32075 + hour / 24.0 + minute / 1440.0 + second / 86400.0 - 0.5;
 }
 
-int tm_jultocal(double julday, int *year, int *month,
+int Tm_JulToCal(double julday, int *year, int *month,
 	int *day, int *hour, int *minute, double *second)
 {
     double iday, fday;
@@ -49,7 +49,7 @@ int tm_jultocal(double julday, int *year, int *month,
     julday += 0.5;
     fday = modf(julday, &iday);
     if (iday > INT_MAX) {
-	err_append("Julian date too big for integer arithmetic.");
+	Err_Append("Julian date too big for integer arithmetic.");
 	return 0;
     }
     l = (int)iday + 68569;
