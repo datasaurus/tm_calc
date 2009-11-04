@@ -14,9 +14,10 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.8 $ $Date: 2009/10/01 22:15:22 $
+   .	$Revision: 1.9 $ $Date: 2009/10/07 17:06:48 $
  */
 
+#include <limits.h>
 #include <math.h>
 #include "err_msg.h"
 #include "tm_calc_lib.h"
