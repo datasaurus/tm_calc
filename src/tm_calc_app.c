@@ -8,14 +8,15 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.8 $ $Date: 2009/10/01 22:15:22 $
+   .	$Revision: 1.9 $ $Date: 2009/10/07 17:06:48 $
  */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "err_msg.h"
-#include "mstring.h"
+#include "alloc.h"
+#include "str.h"
 #include "tm_calc_lib.h"
 
 /* Application name and subcommand name */
