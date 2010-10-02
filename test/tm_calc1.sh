@@ -8,7 +8,7 @@
 #
 # Please send feedback to dev0@trekix.net
 #
-# $Revision: 1.2 $ $Date: 2009/08/26 22:49:22 $
+# $Revision: 1.3 $ $Date: 2009/09/25 21:33:14 $
 #
 ########################################################################
 
@@ -38,7 +38,7 @@ export PATH=$PWD/src:$PATH
 
 # Run the tests
 echo "test1: converting calendar date time to Julian day"
-if [ `tm_calc caltojul -f '%.2f\n' 2009 07 10 00 00 00` == "2455022.50" ]
+if [ `tm_calc caltojul -f '%.2f\n' 2009 07 10 00 00 00` = "2455022.50" ]
 then
     echo "tm_calc produced correct output."
     result1=success
@@ -54,7 +54,7 @@ Done with test1
 
 echo "test2: converting Julian day to calendar date"
 j=`tm_calc jultocal -f '%04d %02d %02d %02d %02d %04.1f\n' 2455022.50`
-if [ "$j" == "2009 07 10 00 00 00.0" ]
+if [ "$j" = "2009 07 10 00 00 00.0" ]
 then
     echo "tm_calc produced correct output."
     result2=success
