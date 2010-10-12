@@ -8,7 +8,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.9 $ $Date: 2009/10/07 17:06:48 $
+   .	$Revision: 1.10 $ $Date: 2010/03/04 15:51:38 $
  */
 
 #include <stdlib.h>
@@ -217,20 +217,19 @@ int jultocal_cb(int argc, char *argv[])
     double j;
 
     /* Ensure minimum command line */
-    if (argc < 2) {
+    if ( argc == 2 ) {
+	fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
+	j_s = argv[1];
+    } else if ( argc == 4 && strcmp(argv[1], "-f") == 0 ) {
+	fmt = Str_Esc(argv[2]);
+	j_s = argv[3];
+    } else {
 	Err_Append("Usage: ");
 	Err_Append(cmd);
 	Err_Append(" ");
 	Err_Append(cmd1);
 	Err_Append("[-f format] julian_day\n");
 	return 0;
-    }
-    fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
-    if (strcmp(argv[1], "-f") == 0) {
-	fmt = Str_Esc(argv[2]);
-	j_s = argv[3];
-    } else {
-	j_s = argv[1];
     }
 
     /* Get Julian date from command line argument */
