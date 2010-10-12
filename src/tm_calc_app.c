@@ -8,7 +8,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.10 $ $Date: 2010/03/04 15:51:38 $
+   .	$Revision: 1.13 $ $Date: 2011/05/04 13:58:30 $
  */
 
 #include <stdlib.h>
@@ -82,20 +82,20 @@ int resoln_cb(int argc, char *argv[])
     int da;
     char *fmt;
 
-    /* Ensure minimum command line */
-    if (argc < 7) {
+    /* Parse command line */
+    if ( argc == 7 ) {
+	da = 0;
+	fmt = "%lf\n";
+    } else if ( argc == 9 && strcmp(argv[1], "-f" ) == 0) {
+	fmt = Str_Esc(argv[2]);
+	da = 2;
+    } else {
 	Err_Append("Usage: ");
 	Err_Append(cmd);
 	Err_Append(" ");
 	Err_Append(cmd1);
 	Err_Append(" [-f format] year month day hour minute second\n");
 	return 0;
-    }
-    fmt = "%lf\n";
-    da = 0;
-    if (strcmp(argv[1], "-f") == 0) {
-	fmt = Str_Esc(argv[2]);
-	da = 2;
     }
     yr_s = argv[1 + da];
     mo_s = argv[2 + da];
@@ -149,20 +149,20 @@ int caltojul_cb(int argc, char *argv[])
     int da;
     char *fmt;
 
-    /* Ensure minimum command line */
-    if (argc < 7) {
+    /* Parse command line */
+    if ( argc == 7 ) {
+	fmt = "%lf\n";
+	da = 0;
+    } else if ( argc == 9 && strcmp(argv[1], "-f" ) == 0) {
+	fmt = Str_Esc(argv[2]);
+	da = 2;
+    } else {
 	Err_Append("Usage: ");
 	Err_Append(cmd);
 	Err_Append(" ");
 	Err_Append(cmd1);
 	Err_Append(" [-f format] year month day hour minute second\n");
 	return 0;
-    }
-    fmt = "%lf\n";
-    da = 0;
-    if (strcmp(argv[1], "-f") == 0) {
-	fmt = Str_Esc(argv[2]);
-	da = 2;
     }
     yr_s = argv[1 + da];
     mo_s = argv[2 + da];
@@ -216,7 +216,7 @@ int jultocal_cb(int argc, char *argv[])
     char *j_s;
     double j;
 
-    /* Ensure minimum command line */
+    /* Parse command line */
     if ( argc == 2 ) {
 	fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
 	j_s = argv[1];
