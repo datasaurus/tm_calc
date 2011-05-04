@@ -219,7 +219,7 @@ int jultocal_cb(int argc, char *argv[])
 
     /* Parse command line */
     if ( argc == 2 ) {
-	fmt = "%02d %02d %02d %02d %02d %04.1lf\n";
+	fmt = "%2d %2d %2d %2d %2d %4.1lf\n";
 	j_s = argv[1];
     } else if ( argc == 4 && strcmp(argv[1], "-f") == 0 ) {
 	fmt = Str_Esc(argv[2]);
