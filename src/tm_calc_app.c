@@ -40,7 +40,7 @@ callback *cb1v[NCMD] = {resoln_cb, caltojul_cb, jultocal_cb};
 int main(int argc, char *argv[])
 {
     int i;
-    int rslt;
+    int rslt = 0;
 
     /* Ensure minimum command line */
     cmd = argv[0];
@@ -74,6 +74,7 @@ int main(int argc, char *argv[])
     }
     return !rslt;
 }
+
 int resoln_cb(int argc, char *argv[])
 {
     char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
@@ -140,7 +141,7 @@ int resoln_cb(int argc, char *argv[])
     printf(fmt, Tm_Resoln(yr, mo, dy, hr, mi, sc));
     return 1;
 }
-
+
 int caltojul_cb(int argc, char *argv[])
 {
     char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
@@ -207,7 +208,7 @@ int caltojul_cb(int argc, char *argv[])
     printf(fmt, Tm_CalToJul(yr, mo, dy, hr, mi, sc));
     return 1;
 }
-
+
 int jultocal_cb(int argc, char *argv[])
 {
     int yr, mo, dy, hr, mi;
