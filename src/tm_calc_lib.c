@@ -36,7 +36,7 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.10 $ $Date: 2009/11/04 21:09:15 $
+   .	$Revision: 1.11 $ $Date: 2011/09/22 16:47:47 $
  */
 
 #include <limits.h>
@@ -44,17 +44,8 @@
 #include "err_msg.h"
 #include "tm_calc_lib.h"
 
-double Tm_Resoln(int y, int mo, int d, int h, int mi, double s)
-{
-    double j1, j2;
-
-    j1 = Tm_CalToJul(y, mo, d, h, mi, s);
-    j2 = nextafter(j1, j1 + 1);
-    return (j2 - j1) * 86400.0;
-}
-
 double Tm_CalToJul(int year, int month, int day,
-	int hour, int minute, double second)
+	int hour, int minute, int second)
 {
     return (1461 * (year + 4800 + (month - 14) / 12)) / 4
 	+ (367 * (month - 2 - 12 * ((month - 14) / 12))) / 12
@@ -63,11 +54,10 @@ double Tm_CalToJul(int year, int month, int day,
 }
 
 int Tm_JulToCal(double julday, int *year, int *month,
-	int *day, int *hour, int *minute, double *second)
+	int *day, int *hour, int *minute, int *second)
 {
-    double iday, fday;
+    double iday, fday;		/* Integer and fractional part of julday */
     int l, n, i, j;		/* Intermediaries */
-    double ihour, fhour, imin, fmin;
 
     julday += 0.5;
     fday = modf(julday, &iday);
@@ -86,10 +76,14 @@ int Tm_JulToCal(double julday, int *year, int *month,
     *month = j + 2 - (12 * l);
     *year = 100 * (n - 49) + i + l;
 
-    fhour = modf(fday * 24.0, &ihour);
-    *hour = (int)ihour;
-    fmin = modf(fhour * 60.0, &imin);
-    *minute = (int)imin;
-    *second = fmin * 60.0;
+    /*
+       Round fday to nearest second and extract hour and minute
+     */
+
+    *second = fday * 86400 + 0.5;
+    *minute = *second / 60;
+    *second = *second - *minute * 60;
+    *hour = *minute / 60;
+    *minute = *minute - *hour * 60;
     return 1;
 }

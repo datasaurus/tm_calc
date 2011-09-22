@@ -3,12 +3,34 @@
    -		This file defines an application that does
    -		time calculations.
    -	
-   .	Copyright (c) 2008 Gordon D. Carrie
-   .	All rights reserved
+   .	Copyright (c) 2011, Gordon D. Carrie. All rights reserved.
+   .	
+   .	Redistribution and use in source and binary forms, with or without
+   .	modification, are permitted provided that the following conditions
+   .	are met:
+   .	
+   .	    * Redistributions of source code must retain the above copyright
+   .	    notice, this list of conditions and the following disclaimer.
+   .
+   .	    * Redistributions in binary form must reproduce the above copyright
+   .	    notice, this list of conditions and the following disclaimer in the
+   .	    documentation and/or other materials provided with the distribution.
+   .	
+   .	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   .	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   .	LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   .	A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+   .	HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   .	SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+   .	TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+   .	PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+   .	LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+   .	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+   .	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.13 $ $Date: 2011/05/04 13:58:30 $
+   .	$Revision: 1.14 $ $Date: 2011/05/04 14:21:15 $
  */
 
 #include <stdlib.h>
@@ -24,18 +46,17 @@ char *cmd, *cmd1;
 
 /* Callback functions.  There should be one for each subcommand. */
 typedef int (callback)(int , char **);
-callback resoln_cb;
 callback caltojul_cb;
 callback jultocal_cb;
 
 /* Number of subcommands */
-#define NCMD 3
+#define NCMD 2
 
 /* Array of subcommand names */
-char *cmd1v[NCMD] = {"resoln", "caltojul", "jultocal"};
+char *cmd1v[NCMD] = {"caltojul", "jultocal"};
 
 /* Array of subcommand callbacks. cb1v[i] is the callback for cmd1v[i] */
-callback *cb1v[NCMD] = {resoln_cb, caltojul_cb, jultocal_cb};
+callback *cb1v[NCMD] = {caltojul_cb, jultocal_cb};
 
 int main(int argc, char *argv[])
 {
@@ -75,78 +96,10 @@ int main(int argc, char *argv[])
     return !rslt;
 }
 
-int resoln_cb(int argc, char *argv[])
-{
-    char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
-    int yr, mo, dy, hr, mi;
-    double sc;
-    int da;
-    char *fmt;
-
-    /* Parse command line */
-    if ( argc == 7 ) {
-	da = 0;
-	fmt = "%lf\n";
-    } else if ( argc == 9 && strcmp(argv[1], "-f" ) == 0) {
-	fmt = Str_Esc(argv[2]);
-	da = 2;
-    } else {
-	Err_Append("Usage: ");
-	Err_Append(cmd);
-	Err_Append(" ");
-	Err_Append(cmd1);
-	Err_Append(" [-f format] year month day hour minute second\n");
-	return 0;
-    }
-    yr_s = argv[1 + da];
-    mo_s = argv[2 + da];
-    dy_s = argv[3 + da];
-    hr_s = argv[4 + da];
-    mi_s = argv[5 + da];
-    sc_s = argv[6 + da];
-
-    /* Get values from command line arguments */
-    if (sscanf(yr_s, "%d", &yr) != 1) {
-	Err_Append("Expected integer value for year, got ");
-	Err_Append(yr_s);
-	return 0;
-    }
-    if (sscanf(mo_s, "%d", &mo) != 1) {
-	Err_Append("Expected integer value for month, got ");
-	Err_Append(mo_s);
-	return 0;
-    }
-    if (sscanf(dy_s, "%d", &dy) != 1) {
-	Err_Append("Expected integer value for day, got ");
-	Err_Append(dy_s);
-	return 0;
-    }
-    if (sscanf(hr_s, "%d", &hr) != 1) {
-	Err_Append("Expected integer value for hour, got ");
-	Err_Append(hr_s);
-	return 0;
-    }
-    if (sscanf(mi_s, "%d", &mi) != 1) {
-	Err_Append("Expected integer value for minute, got ");
-	Err_Append(mi_s);
-	return 0;
-    }
-    if (sscanf(sc_s, "%lf", &sc) != 1) {
-	Err_Append("Expected float value for second, got ");
-	Err_Append(sc_s);
-	return 0;
-    }
-
-    /* Send result */
-    printf(fmt, Tm_Resoln(yr, mo, dy, hr, mi, sc));
-    return 1;
-}
-
 int caltojul_cb(int argc, char *argv[])
 {
     char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
-    int yr, mo, dy, hr, mi;
-    double sc;
+    int yr, mo, dy, hr, mi, sc;
     int da;
     char *fmt;
 
@@ -198,7 +151,7 @@ int caltojul_cb(int argc, char *argv[])
 	Err_Append(mi_s);
 	return 0;
     }
-    if (sscanf(sc_s, "%lf", &sc) != 1) {
+    if (sscanf(sc_s, "%d", &sc) != 1) {
 	Err_Append("Expected float value for second, got ");
 	Err_Append(sc_s);
 	return 0;
@@ -211,15 +164,14 @@ int caltojul_cb(int argc, char *argv[])
 
 int jultocal_cb(int argc, char *argv[])
 {
-    int yr, mo, dy, hr, mi;
-    double sc;
-    char *fmt;
-    char *j_s;
-    double j;
+    int yr, mo, dy, hr, mi, sc;
+    char *fmt;			/* Output format */
+    char *j_s;			/* Julian day, string from command line */
+    double j;			/* Julian day */
 
     /* Parse command line */
     if ( argc == 2 ) {
-	fmt = "%2d %2d %2d %2d %2d %4.1lf\n";
+	fmt = "%d %d %d %d %d %d\n";
 	j_s = argv[1];
     } else if ( argc == 4 && strcmp(argv[1], "-f") == 0 ) {
 	fmt = Str_Esc(argv[2]);
