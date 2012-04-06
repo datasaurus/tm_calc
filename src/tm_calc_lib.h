@@ -31,11 +31,13 @@
    .
    .	Please address questions and feedback to dev0@trekix.net.
    .
-   .	$Revision: 1.6 $ $Date: 2009/10/07 17:06:48 $
+   .	$Revision: 1.7 $ $Date: 2011/09/22 18:29:47 $
  */
 
 #ifndef _TMCALC_H_
 #define _TMCALC_H_
+
+#define TMCALC_VERSION "1.0"
 
 double Tm_CalToJul(int, int, int, int, int, int);
 int Tm_JulToCal(double, int *, int *, int *, int *, int *, int *);
