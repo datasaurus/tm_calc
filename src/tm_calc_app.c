@@ -30,7 +30,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.14 $ $Date: 2011/05/04 14:21:15 $
+   .	$Revision: 1.15 $ $Date: 2011/09/22 18:29:47 $
  */
 
 #include <stdlib.h>
@@ -66,7 +66,9 @@ int main(int argc, char *argv[])
     /* Ensure minimum command line */
     cmd = argv[0];
     if (argc < 2) {
-	fprintf(stderr, "Usage: %s subcommand [subcommand_options ...]\n", cmd);
+	fprintf(stderr, "%s %s\n"
+		"Usage: %s subcommand [subcommand_options ...]\n",
+		cmd, TMCALC_VERSION, cmd);
 	exit(1);
     }
     cmd1 = argv[1];
