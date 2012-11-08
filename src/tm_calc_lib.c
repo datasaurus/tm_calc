@@ -36,12 +36,12 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.11 $ $Date: 2011/09/22 16:47:47 $
+   .	$Revision: 1.12 $ $Date: 2011/09/22 18:29:47 $
  */
 
 #include <limits.h>
 #include <math.h>
-#include "err_msg.h"
+#include <stdio.h>
 #include "tm_calc_lib.h"
 
 double Tm_CalToJul(int year, int month, int day,
@@ -62,7 +62,7 @@ int Tm_JulToCal(double julday, int *year, int *month,
     julday += 0.5;
     fday = modf(julday, &iday);
     if (iday > INT_MAX) {
-	Err_Append("Julian date too big for integer arithmetic.");
+	fprintf(stderr, "Julian day iday too big for integer arithmetic.");
 	return 0;
     }
     l = (int)iday + 68569;

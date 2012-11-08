@@ -25,7 +25,7 @@
 .\" 
 .\" Please address questions and feedback to dev0@trekix.net
 .\"
-.\" $Revision: 1.6 $ $Date: 2009/10/07 17:06:48 $
+.\" $Revision: 1.7 $ $Date: 2011/11/28 16:57:49 $
 .\"
 .TH tm_calc 1 "time functions"
 .SH NAME
@@ -48,7 +48,7 @@ and Julian days.
 \fBTm_JulToCal\fP puts the calendar/clock\ time values for Julian time
 \fIjulian_day\fP into \fIyear\fP \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP
 \fIsecond\fP.  If successful, it returns true.  If something goes wrong,
-it makes an error message that can be retrieved with \fBErr_Get\fP and returns
+it prints an error message to standard error\fP and returns
 false.
 .SH "SEE ALSO"
 tm_calc (1), err_msg (3)
