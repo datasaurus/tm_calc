@@ -25,34 +25,60 @@
 .\" 
 .\" Please address questions and feedback to dev0@trekix.net
 .\"
-.\" $Revision: 1.7 $ $Date: 2011/11/28 16:57:49 $
+.\" $Revision: 1.8 $ $Date: 2012/11/08 21:16:43 $
 .\"
-.TH tm_calc 1 "time functions"
-.SH NAME
-Tm_CalToJul, Tm_JulToCal \- basic time conversions.
-.SH SYNOPSIS
-.nf
-\fB#include <tm_calc_lib.h>\fP
-\fBdouble Tm_CalToJul\fP(\fBint\fP \fIyear\fP, \fBint\fP \fImonth\fP, \fBint\fP \fIday\fP,
-	\fBint\fP \fIhour\fP, \fBint\fP \fIminute\fP, \fBdouble\fP \fIsecond\fP);
-\fBint Tm_JulToCal\fP(\fBdouble\fP \fIjulian_day\fP, \fBint *\fP \fIyear\fP, \fBint *\fP \fImonth\fP, \fBint *\fP \fIday\fP,
-	\fBint *\fP \fIhour\fP, \fBint *\fP \fIminute\fP, \fBdouble *\fP \fIsecond\fP);
-.fi
-.SH DESCRIPTION
-These functions convert back and forth between calendar/clock\ time representations
-and Julian days.
-
-\fBTm_CalToJul\fP returns the Julian day corresponding to \fIyear\fP \fImonth\fP
-\fIday\fP \fIhour\fP \fIminute\fP \fIsecond\fP.
-
-\fBTm_JulToCal\fP puts the calendar/clock\ time values for Julian time
-\fIjulian_day\fP into \fIyear\fP \fImonth\fP \fIday\fP \fIhour\fP \fIminute\fP
-\fIsecond\fP.  If successful, it returns true.  If something goes wrong,
-it prints an error message to standard error\fP and returns
+.Dd $Mdocdate$
+.Dt tm_calc 1
+.Os UNIX
+.Nm NAME
+.Nm Tm_CalToJul
+.Nm Tm_JulToCal
+.Nd basic time conversions.
+.Sh SYNOPSIS
+.Fd "#include <tm_calc_lib.h>"
+.Ft double
+.Fn Tm_CalToJul "int year" "int month" "int day" "int hour" "int minute" "double second"
+.Ft int
+.Fn Tm_JulToCal "double julian_day" "int *year" "int *month" "int *day" "int *hour" "int *minute" "double *second"
+.Sh DESCRIPTION
+These functions convert back and forth between calendar and clock time
+representations and Julian days.
+.Pp
+.Fn Tm_CalToJul
+returns the Julian day corresponding to
+.Fa year
+.Fa month
+.Fa day
+.Fa hour
+.Fa minute
+.Fa second .
+.Pp
+.Fn Tm_JulToCal
+puts the calendar and clock time values for Julian time
+.Fa julian_day
+into
+.Fa year
+.Fa month
+.Fa day
+.Fa hour
+.Fa minute
+.Fa second .
+If successful, it returns true.  If something goes wrong,
+it prints an error message to standard error and returns
 false.
-.SH "SEE ALSO"
-tm_calc (1), err_msg (3)
-.SH KEYWORDS
-time
-.SH AUTHOR
+.Sh SEE ALSO
+.Xr tm_calc 1 ,
+.Rs
+.%A H. F. Fliegel and T. C. Van Flandern
+.%T Letters to the editor: a machine algorithm for processing calendar dates.
+.%J Communications of the ACM archive
+.%V 11
+.%N 10
+.%D October 1968
+.%P 657
+.%O ISSN:0001-0782 
+.Re
+.Sh KEYWORDS
+time calendar julian
+.Sh AUTHOR
 Gordon Carrie (dev0@trekix.net)
