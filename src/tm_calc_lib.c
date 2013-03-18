@@ -36,7 +36,7 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.12 $ $Date: 2011/09/22 18:29:47 $
+   .	$Revision: 1.13 $ $Date: 2012/11/08 21:16:43 $
  */
 
 #include <limits.h>
@@ -45,7 +45,7 @@
 #include "tm_calc_lib.h"
 
 double Tm_CalToJul(int year, int month, int day,
-	int hour, int minute, int second)
+	int hour, int minute, double second)
 {
     return (1461 * (year + 4800 + (month - 14) / 12)) / 4
 	+ (367 * (month - 2 - 12 * ((month - 14) / 12))) / 12
@@ -54,9 +54,11 @@ double Tm_CalToJul(int year, int month, int day,
 }
 
 int Tm_JulToCal(double julday, int *year, int *month,
-	int *day, int *hour, int *minute, int *second)
+	int *day, int *hour, int *minute, double *second)
 {
-    double iday, fday;		/* Integer and fractional part of julday */
+    double iday, fday;		/* Integer part, fraction of julday */
+    double ihour, fhour;	/* Integer part, fraction of hour */
+    double imin, fmin;		/* Integer part, fraction of minute */
     int l, n, i, j;		/* Intermediaries */
 
     julday += 0.5;
@@ -76,14 +78,11 @@ int Tm_JulToCal(double julday, int *year, int *month,
     *month = j + 2 - (12 * l);
     *year = 100 * (n - 49) + i + l;
 
-    /*
-       Round fday to nearest second and extract hour and minute
-     */
+    fhour = modf(fday * 24, &ihour);
+    fmin = modf(fhour * 60, &imin);
+    *hour = ihour;
+    *minute = imin;
+    *second = fmin * 60;
 
-    *second = fday * 86400 + 0.5;
-    *minute = *second / 60;
-    *second = *second - *minute * 60;
-    *hour = *minute / 60;
-    *minute = *minute - *hour * 60;
     return 1;
 }

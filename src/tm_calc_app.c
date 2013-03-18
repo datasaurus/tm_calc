@@ -30,7 +30,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.16 $ $Date: 2012/04/06 21:11:46 $
+   .	$Revision: 1.17 $ $Date: 2012/12/06 22:04:24 $
  */
 
 #include <stdlib.h>
@@ -99,7 +99,8 @@ int main(int argc, char *argv[])
 int caltojul_cb(int argc, char *argv[])
 {
     char *yr_s, *mo_s, *dy_s, *hr_s, *mi_s, *sc_s;
-    int yr, mo, dy, hr, mi, sc;
+    int yr, mo, dy, hr, mi;
+    double sc;
     int da;
     char *fmt;
 
@@ -143,7 +144,7 @@ int caltojul_cb(int argc, char *argv[])
 	fprintf(stderr, "Expected integer value for minute, got %s\n", mi_s);
 	return 0;
     }
-    if (sscanf(sc_s, "%d", &sc) != 1) {
+    if (sscanf(sc_s, "%lf", &sc) != 1) {
 	fprintf(stderr, "Expected float value for second, got %s\n", sc_s);
 	return 0;
     }
@@ -155,14 +156,15 @@ int caltojul_cb(int argc, char *argv[])
 
 int jultocal_cb(int argc, char *argv[])
 {
-    int yr, mo, dy, hr, mi, sc;
+    int yr, mo, dy, hr, mi;
+    double sc;
     char *fmt;			/* Output format */
     char *j_s;			/* Julian day, string from command line */
     double j;			/* Julian day */
 
     /* Parse command line */
     if ( argc == 2 ) {
-	fmt = "%d %d %d %d %d %d\n";
+	fmt = "%d %d %d %d %d %lf\n";
 	j_s = argv[1];
     } else if ( argc == 4 && strcmp(argv[1], "-f") == 0 ) {
 	fmt = Str_Esc(argv[2]);

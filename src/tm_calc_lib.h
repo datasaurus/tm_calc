@@ -31,7 +31,7 @@
    .
    .	Please address questions and feedback to dev0@trekix.net.
    .
-   .	$Revision: 1.7 $ $Date: 2011/09/22 18:29:47 $
+   .	$Revision: 1.8 $ $Date: 2012/04/06 21:12:25 $
  */
 
 #ifndef _TMCALC_H_
@@ -39,7 +39,7 @@
 
 #define TMCALC_VERSION "1.0"
 
-double Tm_CalToJul(int, int, int, int, int, int);
-int Tm_JulToCal(double, int *, int *, int *, int *, int *, int *);
+double Tm_CalToJul(int, int, int, int, int, double);
+int Tm_JulToCal(double, int *, int *, int *, int *, int *, double *);
 
 #endif
