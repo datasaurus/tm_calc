@@ -1,8 +1,6 @@
 /*
-   -	tm_calc.h --
-   -		This header declares structures and
-   -		functions that store and manipulate
-   -		time values.  See tm_calc (3).
+   -	alloc.h --
+   -		This header declares memory allocators.  See alloc (3).
    -	
    .	Copyright (c) 2011, Gordon D. Carrie. All rights reserved.
    .	
@@ -29,17 +27,24 @@
    .	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
    .	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    .
-   .	Please address questions and feedback to dev0@trekix.net.
+   .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.9 $ $Date: 2013/03/18 17:23:31 $
+   .	$Revision: 1.26 $ $Date: 2013/11/13 22:53:07 $
  */
 
-#ifndef _TMCALC_H_
-#define _TMCALC_H_
+#ifndef ALLOC_H_
+#define ALLOC_H_
 
-#define TMCALC_VERSION "1.0"
+#include <stdlib.h>
 
-double Tm_CalToJul(int, int, int, int, int, double);
-int Tm_JulToCal(double, int *, int *, int *, int *, int *, double *);
+#define MALLOC(s) Tkx_Malloc((s), __FILE__, __LINE__)
+#define CALLOC(n,s) Tkx_Calloc((n), (s), __FILE__, __LINE__)
+#define REALLOC(x,s) Tkx_ReAlloc((x), (s), __FILE__, __LINE__)
+#define FREE(x) Tkx_Free((x), __FILE__, __LINE__)
+
+void *Tkx_Malloc(size_t, char *, int);
+void *Tkx_Calloc(size_t, size_t, char *, int);
+void *Tkx_ReAlloc(void *, size_t, char *, int);
+void Tkx_Free(void *, char *, int);
 
 #endif

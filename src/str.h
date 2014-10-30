@@ -1,8 +1,7 @@
 /*
-   -	tm_calc.h --
-   -		This header declares structures and
-   -		functions that store and manipulate
-   -		time values.  See tm_calc (3).
+   -	str.h --
+   -		This header declares string manipulation
+   -		functions.  See str (3).
    -	
    .	Copyright (c) 2011, Gordon D. Carrie. All rights reserved.
    .	
@@ -29,17 +28,19 @@
    .	NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
    .	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    .
-   .	Please address questions and feedback to dev0@trekix.net.
+   .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.9 $ $Date: 2013/03/18 17:23:31 $
+   .	$Revision: 1.12 $ $Date: 2013/01/10 21:23:36 $
  */
 
-#ifndef _TMCALC_H_
-#define _TMCALC_H_
+#ifndef STR_H_
+#define STR_H_
 
-#define TMCALC_VERSION "1.0"
+#include <stdlib.h>
 
-double Tm_CalToJul(int, int, int, int, int, double);
-int Tm_JulToCal(double, int *, int *, int *, int *, int *, double *);
-
+char *Str_Esc(char *s);
+char ** Str_Words(char *, char **, int *);
+char * Str_Append(char *, size_t *, size_t *, char *, size_t);
+int Str_GetLn(FILE *, char, char **, size_t *);
+    
 #endif

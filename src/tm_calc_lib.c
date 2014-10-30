@@ -36,7 +36,7 @@
    .		Communications of the ACM archive
    .		Volume 11 , Issue 10 (October 1968) Page: 657 ISSN:0001-0782 
    .
-   .	$Revision: 1.14 $ $Date: 2013/03/18 17:23:31 $
+   .	$Revision: 1.15 $ $Date: 2014/10/20 22:54:51 $
  */
 
 #include <limits.h>

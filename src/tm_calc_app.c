@@ -30,7 +30,7 @@
    .
    .	Please send feedback to dev0@trekix.net
    .
-   .	$Revision: 1.17 $ $Date: 2012/12/06 22:04:24 $
+   .	$Revision: 1.18 $ $Date: 2013/03/18 17:24:01 $
  */
 
 #include <stdlib.h>
