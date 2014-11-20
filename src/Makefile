@@ -43,9 +43,9 @@ all : ${EXECS}
 
 install : ${EXECS}
 	mkdir -p ${BINDIR}
-	cp ${EXECS} ${BINDIR}
+	cp -f -p ${EXECS} ${BINDIR}
 	mkdir -p ${MAN1DIR}
-	cp ${MAN1} ${MAN1DIR}
+	cp -f -p ${MAN1} ${MAN1DIR}
 
 OBJ = tm_calc_app.o tm_calc_lib.o str.o alloc.o
 tm_calc : ${OBJ}
